@@ -16,8 +16,8 @@
 # under the License.
 
 [package]
-description = "Apache OpenDAL OPFS service implementation"
-name = "opendal-service-opfs"
+description = "Volcengine TOS service implementation for Apache OpenDAL"
+name = "opendal-service-tos"
 
 authors = { workspace = true }
 edition = { workspace = true }
@@ -30,20 +30,18 @@ version = { workspace = true }
 [package.metadata.docs.rs]
 all-features = true
 
-[target.'cfg(target_arch = "wasm32")'.dependencies]
-js-sys = "0.3.85"
+[dependencies]
+bytes = { workspace = true }
+http = { workspace = true }
 opendal-core = { path = "../../core", version = "0.55.0", default-features = false }
+quick-xml = { workspace = true, features = ["serialize", "overlapped-lists"] }
+reqsign-file-read-tokio = { git = "https://github.com/apache/opendal-reqsign.git", rev = "7b2bbb1", default-features = false }
+reqsign-http-send-reqwest = { git = "https://github.com/apache/opendal-reqsign.git", rev = "7b2bbb1", default-features = false }
+reqsign-core = { git = "https://github.com/apache/opendal-reqsign.git", rev = "7b2bbb1", default-features = false }
+reqsign-volcengine-tos = { git = "https://github.com/apache/opendal-reqsign.git", rev = "7b2bbb1", default-features = false }
 serde = { workspace = true, features = ["derive"] }
-wasm-bindgen = "0.2.100"
-wasm-bindgen-futures = "0.4.50"
-web-sys = { version = "0.3.77", features = [
-  "Window",
-  "File",
-  "FileSystemDirectoryHandle",
-  "FileSystemFileHandle",
-  "FileSystemGetDirectoryOptions",
-  "FileSystemGetFileOptions",
-  "FileSystemWritableFileStream",
-  "Navigator",
-  "StorageManager",
-] }
+serde_json = { workspace = true }
+
+[dev-dependencies]
+tokio.workspace = true
+rand.workspace = true
